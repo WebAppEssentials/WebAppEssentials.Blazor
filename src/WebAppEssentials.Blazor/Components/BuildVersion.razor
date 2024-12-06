@@ -1,0 +1,25 @@
+@using System.Reflection
+<span>@_assemblyVersion</span>
+
+@code {
+    private string _assemblyVersion;
+
+    protected override void OnInitialized()
+    {
+        // Get the assembly where this code is executing
+        var assembly = Assembly.GetEntryAssembly();
+
+        // Get the assembly version
+        if (assembly != null)
+        {
+            var version = assembly.GetName().Version;
+
+            // Convert version to a string
+            if (version != null)
+            {
+                _assemblyVersion = version.ToString();
+            }
+        }
+        base.OnInitialized();
+    } 
+}
