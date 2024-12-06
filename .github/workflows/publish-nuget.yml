@@ -1,0 +1,43 @@
+name: Publish NuGet Package
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+    # Publish semver tags as releases.
+    tags: [ 'v*.*.*' ]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      # Setup .NET environment
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0'
+
+      - name: Set up NuGet authentication
+        run: dotnet nuget add source --name github --username GH_NUGET_USERNAME --password ${{ secrets.GH_NUGET_TOKEN }} --store-password-in-clear-text https://nuget.pkg.github.com/WebAppEssentials/index.json
+      
+      # Restore dependencies
+      - name: Restore dependencies
+        run: dotnet restore ./src/WebAppEssentials.Blazor/WebAppEssentials.Blazor.csproj
+
+      # Build the project
+      - name: Build project
+        run: dotnet build --configuration Release --no-restore ./src/WebAppEssentials.Blazor/WebAppEssentials.Blazor.csproj
+        
+        # Pack the library
+      - name: Pack NuGet Package
+        run: dotnet pack --configuration Release --no-build --output ./nupkgs ./src/WebAppEssentials.Blazor/WebAppEssentials.Blazor.csproj
+      
+      # Push to GitHub Package Registry
+      - name: Publish NuGet Package
+        run: dotnet nuget push "./nupkgs/*.nupkg" --source "github" --api-key ${{ secrets.GH_NUGET_TOKEN }} --skip-duplicate

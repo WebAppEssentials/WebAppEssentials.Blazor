@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Authors>Torsten Werner</Authors>
+        <RepositoryUrl>https://github.com/WebAppEssentials/WebAppEssentials.Blazor</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/WebAppEssentials</PackageProjectUrl>
+        <RootNamespace>WebAppEssentials</RootNamespace>
+        <Title>WebAppEssentials.Blazor</Title>
+        <PackageId>WebAppEssentials.Blazor</PackageId>
+        <Description>WebAppEssentials provides essential components for building robust and scalable ASP.NET Core applications.</Description>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <MinVerTagPrefix>v</MinVerTagPrefix>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0"/>
+        <PackageReference Include="MinVer" Version="6.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+</Project>
