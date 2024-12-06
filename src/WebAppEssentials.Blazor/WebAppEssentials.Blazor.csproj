@@ -11,6 +11,10 @@
         <Title>WebAppEssentials.Blazor</Title>
         <PackageId>WebAppEssentials.Blazor</PackageId>
         <Description>WebAppEssentials provides essential components for building robust and scalable ASP.NET Core applications.</Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryType>git</RepositoryType>
+        <PackageIcon>icon.png</PackageIcon>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -27,6 +31,11 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\..\icon.png" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
 </Project>
